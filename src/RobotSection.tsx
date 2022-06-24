@@ -34,7 +34,7 @@ const RobotSection: FunctionComponent<RobotSectionProps> = ({ robot, index }) =>
             {
                 robot.phrase != '' ?
                     <div className="bubble bubble-bottom-left">
-                        <span className="spanBubble">Hello</span>
+                        <span className="spanBubble">{ robot.phrase }</span>
                     </div>
                     :
                     <></>

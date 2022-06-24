@@ -13,14 +13,6 @@ interface MainSectionState {
 };
 
 class MainSection extends Component<MainSectionProps, MainSectionState> {
-    // constructor(props: MainSectionProps) {
-    //     super(props);
-    //     this.state = { robots: null };
-    // }
-
-    // private setRobot = (robot: Robot): void => {
-    //     this.setState({robots: [...this.state.robots, robot]})
-    // }
 
     render() {
         const { robots } = this.props;
@@ -33,7 +25,7 @@ class MainSection extends Component<MainSectionProps, MainSectionState> {
                                 <div className="content-wrapper" style={{ maxHeight: "438.5px" }}>
                                     <div className="robotAndNameSection">
                                         <div id="basicRobot">
-                                            <h3>Male Robot</h3>
+                                            <h3>{robot.type === "male" ? "Male Robot" : "Female Robot"}</h3>
                                         </div>
                                         <RobotSection robot={ robot } index={ index } />
                                     </div>
