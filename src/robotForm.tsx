@@ -13,7 +13,6 @@ interface RobotState {
     type: any;
     color: string;
     phrase: string;
-    options: string[];
 
     checked: boolean;
 
@@ -32,7 +31,7 @@ class RobotForm extends Component<RobotProps, RobotState> {
     constructor(props: RobotProps) {
         super(props);
         this.state = {
-            name: "", type: "", color: "", phrase: "", options: [], checked: true,
+            name: "", type: "", color: "", phrase: "", checked: true,
             labelNameTxt: "Name", labelNameClass: "",
             labelTypeTxt: "Type", labelTypeClass: "",
             labelPhraseTxt: "Phrase", labelPhraseClass: ""
@@ -42,7 +41,7 @@ class RobotForm extends Component<RobotProps, RobotState> {
     private onSubmit(event: FormEvent): void {
         event.preventDefault();
         const target: any = event.target;
-        const { name, type, color, phrase, options, checked } = this.state;
+        const { name, type, color, phrase, checked } = this.state;
         if (name === "" || type === "" || !checked && phrase === "") {
             if (name === "") {
                 this.setState({ labelNameTxt: "Please write a name" });
@@ -65,21 +64,16 @@ class RobotForm extends Component<RobotProps, RobotState> {
         return;
         };
 
-        let jump: string;
-        let talk: string;
-        let blink: string;
+        const options: string[] = [];
 
         if (target.canJump.checked) {
-            jump = "can jump";
-            this.setState({ options: [...this.state.options, jump] });
+            options.push("can jump");
         };
         if (target.canTalk.checked) {
-            talk = "can talk";
-            this.setState({ options: [...this.state.options, talk] });
+            options.push("can talk");
         };
         if (target.canBlink.checked) {
-            blink = "can blink";
-            this.setState({ options: [...this.state.options, blink] });
+            options.push("can blink");
         };
 
         const robot: Robot = new Robot(
@@ -89,8 +83,9 @@ class RobotForm extends Component<RobotProps, RobotState> {
             phrase,
             options
         );
-        this.props.getRobotFromForm(robot);
 
+        this.props.getRobotFromForm(robot);
+        console.log(robot);
         target.reset();
         this.resetName();
         this.resetType();
@@ -112,14 +107,14 @@ class RobotForm extends Component<RobotProps, RobotState> {
     private resetPhrase = () => {
         this.setState({ labelPhraseTxt: "Phrase" });
         this.setState({ labelPhraseClass: "" });
-    }
+    };
 
     render() {
         const {
             checked, name, type, phrase, labelNameTxt, labelNameClass,
             labelTypeTxt, labelTypeClass, labelPhraseTxt, labelPhraseClass
         } = this.state;
-        return ( 
+        return (
             <div className="container">
                 <div className="ct">
                     <div className="carousel">
