@@ -86,6 +86,8 @@ class RobotForm extends Component<RobotProps, RobotState> {
 
         this.props.getRobotFromForm(robot);
         console.log(robot);
+
+        this.setState({ checked: true });
         target.reset();
         this.resetName();
         this.resetType();
@@ -111,7 +113,7 @@ class RobotForm extends Component<RobotProps, RobotState> {
 
     render() {
         const {
-            checked, name, type, phrase, labelNameTxt, labelNameClass,
+            checked, name, phrase, labelNameTxt, labelNameClass,
             labelTypeTxt, labelTypeClass, labelPhraseTxt, labelPhraseClass
         } = this.state;
         return (
@@ -136,7 +138,7 @@ class RobotForm extends Component<RobotProps, RobotState> {
                                 <div className="formOptions">
                                     <label className={labelTypeClass} htmlFor="selectType">{ labelTypeTxt }</label>
                                     <select defaultValue="M/F" name="selectType" id="selectType" onChange={e => this.setState({type: e.target.value})}>
-                                        <option disabled selected hidden>M/F</option>
+                                        <option disabled defaultValue="M/F" hidden>M/F</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
@@ -162,6 +164,7 @@ class RobotForm extends Component<RobotProps, RobotState> {
                                             type="checkbox"
                                             name="canTalk" id="canTalk"
                                             value={"can talk"}
+                                            checked={!checked}
                                             onChange={() => {
                                                 checked ? this.setState({ checked: false }) : this.setState({ checked: true });
                                                 this.setState({ phrase: "" });

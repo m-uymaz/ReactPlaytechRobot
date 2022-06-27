@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import Robot from './Robot';
 import RobotSection from './RobotSection';
 import MessageSection from './MessageSection';
@@ -8,37 +8,33 @@ interface MainSectionProps {
     robots: Robot[];
 };
  
-interface MainSectionState {
-    
-};
 
-class MainSection extends Component<MainSectionProps, MainSectionState> {
+const MainSection: FunctionComponent<MainSectionProps> = ({robots}) => {
 
-    render() {
-        const { robots } = this.props;
-        return (
-            robots.length ?
-                robots.map((robot: Robot, index: number) =>
-                    <div className="ct carousel-container" style={{ border: "3px solid rgb(0, 108, 190)" }}>
-                        <div className="carousel" style={{ transform: "translateX(0px)" }}>
-                            <section className="factory-section">
-                                <div className="content-wrapper" style={{ maxHeight: "438.5px" }}>
-                                    <div className="robotAndNameSection">
-                                        <div id="basicRobot">
-                                            <h3>{robot.type === "male" ? "Male Robot" : "Female Robot"}</h3>
+
+    return (
+        <div className="ct carousel-container" style={{ border: "3px solid rgb(0, 108, 190)" }}>
+            <section className="factory-section">
+                {
+                    robots.length ?
+                        robots.map((robot: Robot, index: number) =>
+                                <div className="carousel" style={{ transform: "translateX(0px)" }}>  
+                                    <div className="content-wrapper" style={{ maxHeight: "438.5px" }}>
+                                        <div className="robotAndNameSection">
+                                            <div id="basicRobot">
+                                                <h3>{robot.type === "male" ? "Male Robot" : "Female Robot"}</h3>
+                                            </div>
+                                            <RobotSection robot={robot} index={index} />
                                         </div>
-                                        <RobotSection robot={ robot } index={ index } />
-                                    </div>
-                                    <MessageSection />
+                                        <MessageSection />
+                                    </div>   
                                 </div>
-                            </section>
-                        </div>
-                    </div>
-                )
-                :
-                <></>
-         );
-    };
+                        ) : <></>
+                }
+            </section>
+        </div>
+    );
+        
 };
  
 export default MainSection;

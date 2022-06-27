@@ -29,7 +29,9 @@ class RobotApp  extends Component<Props, State> {
     return (
       <div>
         <Header/>
-        <MainSection robots={robots} />
+        {
+          robots.length > 0 && <MainSection robots={robots} />
+        }
         <RobotForm getRobotFromForm={this.setRobot} />
       </div>
      );
