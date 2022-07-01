@@ -9,27 +9,27 @@ interface MainSectionProps {
 };
  
 
-const MainSection: FunctionComponent<MainSectionProps> = ({robots}) => {
-
+const MainSection: FunctionComponent<MainSectionProps> = ({ robots }) => {
+    
+    let lastRobot = robots[robots.length - 1];
 
     return (
         <div className="ct carousel-container" style={{ border: "3px solid rgb(0, 108, 190)" }}>
             <section className="factory-section">
                 {
                     robots.length ?
-                        robots.map((robot: Robot, index: number) =>
-                                <div className="carousel" style={{ transform: "translateX(0px)" }}>  
-                                    <div className="content-wrapper" style={{ maxHeight: "438.5px" }}>
-                                        <div className="robotAndNameSection">
-                                            <div id="basicRobot">
-                                                <h3>{robot.type === "male" ? "Male Robot" : "Female Robot"}</h3>
-                                            </div>
-                                            <RobotSection robot={robot} index={index} />
+                            <div className="carousel" style={{ transform: "translateX(0px)" }}>  
+                                <div className="content-wrapper" style={{ maxHeight: "438.5px" }}>
+                                    <div className="robotAndNameSection">
+                                        <div id="basicRobot">
+                                            <h3>{lastRobot.type === "male" ? "Male Robot" : "Female Robot"}</h3>
                                         </div>
-                                        <MessageSection />
-                                    </div>   
-                                </div>
-                        ) : <></>
+                                        <RobotSection robot={lastRobot} />
+                                    </div>
+                                    <MessageSection />
+                                </div>   
+                            </div>
+                            : <></>
                 }
             </section>
         </div>

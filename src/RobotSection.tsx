@@ -4,10 +4,9 @@ import './stylesheets/robot.css';
 
 interface RobotSectionProps {
     robot: Robot;
-    index: number;
 }
 
-const RobotSection: FunctionComponent<RobotSectionProps> = ({ robot, index }) => {
+const RobotSection: FunctionComponent<RobotSectionProps> = ({ robot }) => {
     return (
         <div id="robotContainer">
             <div className={robot.options.includes("can jump") ? "robotFriend wholeRobotJump" : "robotFriend" }>
